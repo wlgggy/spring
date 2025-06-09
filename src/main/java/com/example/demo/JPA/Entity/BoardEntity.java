@@ -1,19 +1,20 @@
 package com.example.demo.JPA.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "board")
+@Getter
+@Setter
 public class BoardEntity {
     @Id
-
-    @Column(name = "no")
-    public int no;
-    @Column(name = "title")
-    public String title;
-    @Column(name = "content")
-    public String content;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int no;
+    private String title;
+    private String content;
+    private LocalDate date;
 }

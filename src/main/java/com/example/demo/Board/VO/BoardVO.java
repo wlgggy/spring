@@ -1,23 +1,10 @@
 package com.example.demo.Board.VO;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 public class BoardVO {
-
-    private int no;
-    private String title;
-    private String content;
-
-    public BoardVO() {
-    }
-
-    public BoardVO(int no, String title, String content) {
-        this.no = no;
-        this.title = title;
-        this.content = content;
-    }
-
+    private int no;         // 게시글 번호 (Entity의 idx 대응)
+    private String title;    // 제목
+    private String content;  // 내용
 }

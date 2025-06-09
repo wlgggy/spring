@@ -1,8 +1,13 @@
 package com.example.demo.Board.Service;
 
-import org.springframework.http.ResponseEntity;
+import com.example.demo.Board.VO.BoardVO;
+
+import java.util.List;
 
 public interface BoardService {
-
-    ResponseEntity<?> findAll();
+    BoardVO create(BoardVO vo);
+    List<BoardVO> findAll();
+    BoardVO findById(int no);
+    BoardVO update(int no, BoardVO vo);
+    void delete(int no);
 }

@@ -1,44 +1,49 @@
 package com.example.demo.Board.Controller;
 
-import com.example.demo.JPA.Entity.BoardEntity;
-import com.example.demo.JPA.Repository.BoardRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.demo.Board.Service.BoardService;
+import com.example.demo.Board.VO.BoardVO;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
+@RequestMapping("/board")
 public class BoardController {
-    @Autowired
-    private final BoardRepository boardRepository;
 
-    public BoardController(BoardRepository boardRepository) {
-        this.boardRepository = boardRepository;
+    private final BoardService boardService;
+
+    @GetMapping
+    public ResponseEntity<List<BoardVO>> getAllBoards() {
+        return ResponseEntity.ok(boardService.findAll());
     }
 
-    /*@GetMapping("/board")
-    public List<BoardEntity> findAll() {
-        return boardRepository.findAll();
-    }*/
+    @GetMapping("/{no}")
+    public ResponseEntity<BoardVO> getBoard(@PathVariable int no) {
+        BoardVO board = boardService.findById(no);
+        if (board == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(board);
+    }
 
-    /*@GetMapping("/board")
-    public BoardEntity findById(@RequestParam(value = "idx", required = false, defaultValue = "1") int idx) {
-        return boardRepository.findById(idx).orElse(null);
-    }*/
 
-    /*@PutMapping("/board")
-    public BoardEntity updateBoard(@RequestBody BoardEntity updatedBoard) {
-        return boardRepository.save(updatedBoard);
-    }*/
+    @PostMapping
+    public ResponseEntity<BoardVO> createBoard(@RequestBody BoardVO boardVO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(boardService.create(boardVO));
+    }
 
-    /*@DeleteMapping("/board")
-    public void deleteBoard(@RequestParam(value = "idx", required = false, defaultValue = "1") int idx) {
-        boardRepository.deleteById(idx);
-    }*/
+    @PutMapping("/{no}")
+    public ResponseEntity<BoardVO> updateBoard(@PathVariable int no, @RequestBody BoardVO boardVO) {
+        return ResponseEntity.ok(boardService.update(no, boardVO));
+    }
 
-    @PostMapping("/board")
-    public BoardEntity createBoard(@RequestBody BoardEntity newBoard) {
-        return boardRepository.save(newBoard);
+    @DeleteMapping("/{no}")
+    public ResponseEntity<Void> deleteBoard(@PathVariable int no) {
+        boardService.delete(no);
+        return ResponseEntity.noContent().build();
     }
 }
