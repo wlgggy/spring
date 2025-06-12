@@ -6,10 +6,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import javax.sql.DataSource;
 
 @SpringBootApplication
+@EnableJpaAuditing
 public class DemoApplication {
 
     private static final Logger logger = LoggerFactory.getLogger(DemoApplication.class);

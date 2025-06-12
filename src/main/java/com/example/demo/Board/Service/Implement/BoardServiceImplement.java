@@ -56,6 +56,8 @@ public class BoardServiceImplement implements BoardService {
         BoardEntity entity = new BoardEntity();
         entity.setTitle(vo.getTitle());
         entity.setContent(vo.getContent());
+        entity.setCreateDate(vo.getCreateDate());
+        entity.setUpdateDate(vo.getUpdateDate());
         return entity;
     }
 
@@ -64,6 +66,8 @@ public class BoardServiceImplement implements BoardService {
         vo.setNo(entity.getNo());
         vo.setTitle(entity.getTitle());
         vo.setContent(entity.getContent());
+        vo.setCreateDate(entity.getCreateDate());
+        vo.setUpdateDate(entity.getUpdateDate());
         return vo;
     }
 }

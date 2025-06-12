@@ -24,12 +24,8 @@ public class BoardController {
     @GetMapping("/{no}")
     public ResponseEntity<BoardVO> getBoard(@PathVariable int no) {
         BoardVO board = boardService.findById(no);
-        if (board == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(board);
     }
-
 
     @PostMapping
     public ResponseEntity<BoardVO> createBoard(@RequestBody BoardVO boardVO) {
